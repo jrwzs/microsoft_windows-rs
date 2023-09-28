@@ -88,6 +88,14 @@ pub fn from_reader(reader: &metadata::Reader, filter: &metadata::Filter, config:
                 writer.tables.Param.push(writer::Param { Flags: reader.param_flags(param).0, Sequence: reader.param_sequence(param), Name: writer.strings.insert(reader.param_name(param)) });
             }
         }
+
+        // TODO: capture TypeDef attributes - code should be generic so that it can be reused for other elements with attributes, such as fields, methods, etc.
+
+        for attribute in reader.attributes(def) {
+            // CustomAttribute columns: Parent(this type), Type(constructor MemberRef), Value(constructor argument values blob)
+
+            // TODO: 
+        }
     }
 
     // TODO: In theory, `config` could instruct this function to balance the types across a number of winmd files
